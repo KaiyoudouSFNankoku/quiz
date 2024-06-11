@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AR Quiz</title>
+    <script src = "https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src = "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+        
+      /* スコアの表示 */
+      #score {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        top: 10px;
+        right: 10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      
+      #scoreValue {
+        font-size: 36px;
+        font-weight: bold;
+      }
+      
+      /* メッセージの表示 */
+      body {
+        margin: 0;
+      }
+      #message {
+        position: fixed;
+        z-index: 10;
+        left: 5%;
+        bottom: 100px;
+        width: 90%;
+        padding: 10px;
+        color: #fff;
+        font-weight: bold;
+        background-color: rgba(0,0,0,.8);
+        border-radius: 20px;
+        border: 3px solid #fff;
+        display: none;
+      }
+
+      /* 解答ボタンの表示 */
+      /*
+      #chooseAnswerButton {
+        position: fixed;
+        z-index: 30;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: rgba(0, 0, 255, 1);
+        border: 1px solid #fff;
+        border-radius: 5px;
+      }
+
+      #answerButton {
+        background-color: transparent;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: sans-serif;
+        border: none;
+        cursor: pointer;
+      }
+      */
+
+      .stamp-history {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        z-index: 100;
+      }
+
+      .stamp-history img {
+        width: 30px;
+        height: 30px;
+      }
+  
+      .feedback-image {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      }
+
+      .feedback-image img {
+        width: 360px;
+        height: 360px;
+      }
+    </style>
+  </head>
+  
+  <body style="margin: 0; overflow: hidden;">
+    <!-- スコア表示 -->
+    <div id="score">
+      <div>Score<br><span id="scoreValue">0</span></div>
+    </div>
+    
+    <!-- メッセージ表示 -->
+    <div id="message"></div>
+
+    <!-- スタンプ履歴表示 -->
+    <div class="stamp-history"></div>
+
+    <!-- フィードバック画像表示 -->
+    <div class="feedback-image" style="display: none;">
+      <img id="feedbackImage" src="" alt="feedback">
+    </div>
+
+    <!-- 解答を確定するボタン -->
+    <!--
+    <div id="chooseAnswerButton">
+      <button id="answerButton">Choose Answer</button>
+    </div>
+    -->
+    
+    <a-scene 
+      vr-mode-ui="enabled: false;"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+    >
+      <!-- 画像 -->
+      <a-assets>
+        <img id="cursor" src="./images/cursor_scope.png">
+        <img id="quiz" src="./images/blackboard.png">
+        <img id="ans01" src="./images/pencil_pink.png">
+        <img id="ans02" src="./images/pencil_blue.png">
+        <img id="ans03" src="./images/pencil_green.png">
+      </a-assets>
+      
+      <!-- Quiz01 -->
+      <a-marker type="pattern" url="./images/marker/pattern-iwamon.patt" id="marker01">
+        <a-entity id="quiz01" geometry="primitive: plane; width: 5; height: 1.5"
+          material="src: #quiz; shader: flat; transparent: true"
+          position="0 -5 -2" rotation="-90 0 0"></a-entity>
+        <a-text value="Q01\n情報セキュリティコースのコース長は\nこの中で誰でしょう?"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 -2" rotation="-90 0 0" color="#ffffff"></a-text>
+        <a-entity id="incorrect1_01"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 0" rotation="-90 0 0"></a-entity>
+        <a-text value="1. ウラヤマ"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 0" rotation="-90 0 0" color="#c71585"></a-text>
+        <a-entity id="correct01"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 1" rotation="-90 0 0"></a-entity>
+        <a-text value="2. タテカワ"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 1" rotation="-90 0 0" color="#4169e1"></a-text>
+        <a-entity id="incorrect2_01"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 2" rotation="-90 0 0"></a-entity>
+        <a-text value="3. イワサキ"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 2" rotation="-90 0 0" color="#008000"></a-text>
+      </a-marker>
+      
+      <!-- Quiz02 -->
+      <a-marker type="pattern" url="./images/marker/pattern-karanchan.patt" id="marker02">
+        <a-entity id="quiz02" geometry="primitive: plane; width: 5; height: 1.5"
+          material="src: #quiz; shader: flat; transparent: true"
+          position="0 -5 -2" rotation="-90 0 0"></a-entity>
+        <a-text value="Q02\n高知高専のコースの略称で\n存在しないものはどれでしょう?"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 -2" rotation="-90 0 0" color="#ffffff"></a-text>
+        <a-entity id="correct02"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 0" rotation="-90 0 0"></a-entity>
+        <a-text value="1. Eコース"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 0" rotation="-90 0 0" color="#c71585"></a-text>
+        <a-entity id="incorrect1_02"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 1" rotation="-90 0 0"></a-entity>
+        <a-text value="2. Tコース"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 1" rotation="-90 0 0" color="#4169e1"></a-text>
+        <a-entity id="incorrect2_02"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 2" rotation="-90 0 0"></a-entity>
+        <a-text value="3. Vコース"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 2" rotation="-90 0 0" color="#008000"></a-text>
+      </a-marker>
+
+      <!-- Quiz03 -->
+      <a-marker type="pattern" url="./images/marker/pattern-kuroshiokun.patt" id="marker03">
+        <a-entity id="quiz03" geometry="primitive: plane; width: 5; height: 1.5"
+          material="src: #quiz; shader: flat; transparent: true"
+          position="0 -5 -2" rotation="-90 0 0"></a-entity>
+        <a-text value="Q03\n土佐弁 ”ざんじ” の意味は\n次のうちどれでしょう?"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 -2" rotation="-90 0 0" color="#ffffff"></a-text>
+        <a-entity id="correct03"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 0" rotation="-90 0 0"></a-entity>
+        <a-text value="1. すぐに"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 0" rotation="-90 0 0" color="#c71585"></a-text>
+        <a-entity id="incorrect1_03"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 1" rotation="-90 0 0"></a-entity>
+        <a-text value="2. だんだんと"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 1" rotation="-90 0 0" color="#4169e1"></a-text>
+        <a-entity id="incorrect2_03"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 2" rotation="-90 0 0"></a-entity>
+        <a-text value="3. 日の入り"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 2" rotation="-90 0 0" color="#008000"></a-text>
+      </a-marker>
+
+      <a-entity camera>
+        <!-- カーソルの表示 -->
+        <a-entity cursor="fuse: true;"
+          position="0 0 -3"
+          geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
+          material="src: #cursor; shader: flat; transparent: true">
+        </a-entity>
+      </a-entity>
+    </a-scene>
+
+    <script type="text/javascript" src="./js/quiz_cursor.js"></script>
+  </body>
+</html>
