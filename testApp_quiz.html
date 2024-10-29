@@ -12,7 +12,7 @@
       * {
         box-sizing: border-box;
       }
-        
+
       /* スコアの表示 */
       #score {
         position: fixed;
@@ -31,12 +31,12 @@
         align-items: center;
         font-family: sans-serif;
       }
-      
+
       #scoreValue {
         font-size: 36px;
         font-weight: bold;
       }
-      
+
       /* メッセージの表示 */
       body {
         margin: 0;
@@ -96,7 +96,7 @@
         width: 30px;
         height: 30px;
       }
-  
+
       .feedback-image {
         position: fixed;
         top: 50%;
@@ -111,13 +111,13 @@
       }
     </style>
   </head>
-  
+
   <body style="margin: 0; overflow: hidden;">
     <!-- スコア表示 -->
     <div id="score">
       <div>Score<br><span id="scoreValue">0</span></div>
     </div>
-    
+
     <!-- メッセージ表示 -->
     <div id="message"></div>
 
@@ -135,29 +135,29 @@
       <button id="answerButton">Choose Answer</button>
     </div>
     -->
-    
-    <a-scene 
+
+    <a-scene
       vr-mode-ui="enabled: false;"
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false;"
     >
       <!-- 画像 -->
       <a-assets>
-        <img id="cursor" src="cursor_scope.png">
-        <img id="quiz" src="blackboard.png">
-        <img id="ans01" src="pencil_pink.png">
-        <img id="ans02" src="pencil_blue.png">
-        <img id="ans03" src="pencil_green.png">
+        <img id="cursor" src="./assets/cursor_scope.png">
+        <img id="quiz" src="./assets/blackboard.png">
+        <img id="ans01" src="./assets/pencil_pink.png">
+        <img id="ans02" src="./assets/pencil_blue.png">
+        <img id="ans03" src="./assets/pencil_green.png">
       </a-assets>
-      
+
       <!-- Quiz01 -->
-      <a-marker type="pattern" url="pattern-iwamon.patt" id="marker01">
+      <a-marker type="pattern" url="./images/marker/pattern-iwamon.patt" id="marker01">
         <a-entity id="quiz01" geometry="primitive: plane; width: 5; height: 1.5"
           material="src: #quiz; shader: flat; transparent: true"
           position="0 -5 -2" rotation="-90 0 0"></a-entity>
         <a-text value="Q01\n情報セキュリティコースのコース長は\nこの中で誰でしょう?"
-          font="noto-sans-cjk-jp-msdf.json"
-          font-image="noto-sans-cjk-jp-msdf.png"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
           align="center" position="0 -4.9 -2" rotation="-90 0 0" color="#ffffff"></a-text>
         <a-entity id="incorrect1_01"
@@ -165,8 +165,8 @@
           material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
           position="0 -5 0" rotation="-90 0 0"></a-entity>
         <a-text value="1. ウラヤマ"
-          font="noto-sans-cjk-jp-msdf.json"
-          font-image="noto-sans-cjk-jp-msdf.png"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
           align="center" position="0 -4.9 0" rotation="-90 0 0" color="#c71585"></a-text>
         <a-entity id="correct01"
@@ -174,8 +174,8 @@
           material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
           position="0 -5 1" rotation="-90 0 0"></a-entity>
         <a-text value="2. タテカワ"
-          font="noto-sans-cjk-jp-msdf.json"
-          font-image="noto-sans-cjk-jp-msdf.png"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
           align="center" position="0 -4.9 1" rotation="-90 0 0" color="#4169e1"></a-text>
         <a-entity id="incorrect2_01"
@@ -183,12 +183,12 @@
           material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
           position="0 -5 2" rotation="-90 0 0"></a-entity>
         <a-text value="3. イワサキ"
-          font="noto-sans-cjk-jp-msdf.json"
-          font-image="noto-sans-cjk-jp-msdf.png"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
           align="center" position="0 -4.9 2" rotation="-90 0 0" color="#008000"></a-text>
       </a-marker>
-      
+
       <!-- Quiz02 -->
       <a-marker type="pattern" url="./images/marker/pattern-karanchan.patt" id="marker02">
         <a-entity id="quiz02" geometry="primitive: plane; width: 5; height: 1.5"
