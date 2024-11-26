@@ -3,10 +3,12 @@ var cursorEnabled = false;
 var quiz01Answered = false;
 var quiz02Answered = false;
 var quiz03Answered = false;
+var quiz04Answered = false;
 
 var marker01 = document.querySelector("#marker01");
 var marker02 = document.querySelector("#marker02");
 var marker03 = document.querySelector("#marker03");
+var marker04 = document.querySelector("#marker04");
 
 // Quiz01
 var correct01 = document.querySelector("#correct01");
@@ -35,6 +37,14 @@ changeColorOnHover(correct03);
 changeColorOnHover(incorrect1_03);
 changeColorOnHover(incorrect2_03);
 
+// Quiz04
+var correct04 = document.querySelector("#correct04");
+var incorrect1_04 = document.querySelector("#incorrect1_04");
+var incorrect2_04 = document.querySelector("#incorrect2_04");
+
+changeColorOnHover(correct04);
+changeColorOnHover(incorrect1_04);
+changeColorOnHover(incorrect2_04);
 /*----- クイズ番号の設定 -----*/
 var quizNumber;
 
@@ -62,6 +72,13 @@ marker03.addEventListener("markerFound", function () {
 	}
 });
 
+marker04.addEventListener("markerFound", function () {
+	if (!quiz04Answered) {
+		// マーカーが見つかった時の処理
+		cursorEnabled = true;
+		quizNumber = 4; // marker04の場合、quizNumberを4に設定
+	}
+});
 // カーソルを無効にする
 marker01.addEventListener("markerLost", function () {
 	cursorEnabled = false;
@@ -75,6 +92,9 @@ marker03.addEventListener("markerLost", function () {
 	cursorEnabled = false;
 });
 
+marker04.addEventListener("markerLost", function () {
+	cursorEnabled = false;
+});
 /*----- カーソルを合わせると色が変わる -----*/
 function changeColorOnHover(element) {
 	let originalColor;
@@ -85,7 +105,8 @@ function changeColorOnHover(element) {
 			if (
 				element === correct01 ||
 				element === correct02 ||
-				element === correct03
+				element === correct03 ||
+				element === correct04
 			) {
 				correctOnHover(element);
 			} else {
@@ -121,6 +142,8 @@ function showFeedback(isCorrect) {
 			feedbackImage.src = "./images/stamp/yosakoi_naruko.png"; // Quiz2の正解のスタンプ画像のパス
 		} else if (quizNumber === 3) {
 			feedbackImage.src = "./images/stamp/katsuo_tataki.png"; // Quiz3の正解のスタンプ画像のパス
+		} else if (quizNumber === 4) {
+			feedbackImage.src = "./images/stamp/computer_dog.png"; // Quiz4の正解のスタンプ画像のパス
 		}
 	} else {
 		feedbackImage.src = "./images/stamp/cross.png"; // 不正解のバツ印画像のパス
@@ -196,6 +219,8 @@ function setAnswered() {
 		quiz02Answered = true;
 	} else if (quizNumber === 3) {
 		quiz03Answered = true;
+	} else if (quizNumber === 4) {
+		quiz04Answered = true;
 	}
 }
 

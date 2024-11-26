@@ -57,7 +57,7 @@
       }
 
       /* 解答ボタンの表示 */
-      /*
+      
       #chooseAnswerButton {
         position: fixed;
         z-index: 30;
@@ -80,7 +80,7 @@
         border: none;
         cursor: pointer;
       }
-      */
+      
 
       .stamp-history {
         position: fixed;
@@ -130,11 +130,10 @@
     </div>
 
     <!-- 解答を確定するボタン -->
-    <!--
     <div id="chooseAnswerButton">
       <button id="answerButton">Choose Answer</button>
     </div>
-    -->
+    
 
     <a-scene
       vr-mode-ui="enabled: false;"
@@ -257,6 +256,45 @@
           negate="false"
           align="center" position="0 -4.9 1" rotation="-90 0 0" color="#4169e1"></a-text>
         <a-entity id="incorrect2_03"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 2" rotation="-90 0 0"></a-entity>
+        <a-text value="3. 日の入り"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 2" rotation="-90 0 0" color="#008000"></a-text>
+      </a-marker>
+
+      <!-- Quiz04 -->
+      <a-marker type="pattern" url="./images/marker/pattern-IMG_3535.patt" id="marker04">
+        <a-entity id="quiz04" geometry="primitive: plane; width: 5; height: 1.5"
+          material="src: #quiz; shader: flat; transparent: true"
+          position="0 -5 -2" rotation="-90 0 0"></a-entity>
+        <a-text value="Q04\nクイズ４はうつしだせました\n"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 -2" rotation="-90 0 0" color="#ffffff"></a-text>
+        <a-entity id="correct04"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 0" rotation="-90 0 0"></a-entity>
+        <a-text value="1. すぐに"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 0" rotation="-90 0 0" color="#c71585"></a-text>
+        <a-entity id="incorrect1_04"
+          geometry="primitive: plane; width: 3.5; height: 0.7"
+          material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
+          position="0 -5 1" rotation="-90 0 0"></a-entity>
+        <a-text value="2. だんだんと"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4.9 1" rotation="-90 0 0" color="#4169e1"></a-text>
+        <a-entity id="incorrect2_04"
           geometry="primitive: plane; width: 3.5; height: 0.7"
           material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
           position="0 -5 2" rotation="-90 0 0"></a-entity>
