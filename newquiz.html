@@ -58,17 +58,22 @@
 
       /* 解答ボタンの表示 */
       
-      #chooseAnswerButton {
-        position: fixed;
-        z-index: 30;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 10px;
+      button{
+        cursor: pointer;
+      }
+      .active{
         background-color: rgba(0, 0, 255, 1);
         border: 1px solid #fff;
         border-radius: 5px;
+        cursor: pointer;
       }
+      .inactive{
+        background-color: rgb(112, 112, 114);
+        border: 1px solid #fff;
+        border-radius: 5px;
+        cursor: not-allowed;
+      }
+
 
       #answerButton {
         background-color: transparent;
@@ -129,10 +134,7 @@
       <img id="feedbackImage" src="" alt="feedback">
     </div>
 
-    <!-- 解答を確定するボタン -->
-    <div id="chooseAnswerButton">
-      <button id="answerButton"onclick="location.href='./Quiz/1/quiz1.html'">Choose Answer</button>
-    </div>
+    
     
 
     <a-scene
@@ -149,33 +151,23 @@
         <img id="ans03" src="./assets/pencil_green.png">
       </a-assets>
 
+    
       <!-- Quiz01 -->
-      <a-marker type="pattern" url="./images/marker/pattern-iwamon.patt" id="marker01">
-        <a-entity id="quiz01" geometry="primitive: plane; width: 5; height: 1.5"
-          material="src: #quiz; shader: flat; transparent: true"
-          position="0 -5 -2" rotation="-90 0 0"></a-entity>
+      <a-marker type="pattern" preset="ab1" url="./images/marker/pattern-iwamon.patt" id="marker01">
+        <a-box position="0 0.5 0" color="red"></a-box>
       </a-marker>
 
       <!-- Quiz02 -->
       <a-marker type="pattern" url="./images/marker/pattern-karanchan.patt" id="marker02">
-        <a-entity id="quiz02" geometry="primitive: plane; width: 5; height: 1.5"
-          material="src: #quiz; shader: flat; transparent: true"
-          position="0 -5 -2" rotation="-90 0 0"></a-entity>
       </a-marker>
 
       <!-- Quiz03 -->
       <a-marker type="pattern" url="./images/marker/pattern-kuroshiokun.patt" id="marker03">
-        <a-entity id="quiz03" geometry="primitive: plane; width: 5; height: 1.5"
-          material="src: #quiz; shader: flat; transparent: true"
-          position="0 -5 -2" rotation="-90 0 0"></a-entity>
       </a-marker>
 
       <!-- Quiz04 -->
       <a-marker type="pattern" url="./images/marker/pattern-kochiyan.patt" id="marker04">
-        <a-entity id="quiz04" geometry="primitive: plane; width: 5; height: 1.5"
-          material="src: #quiz; shader: flat; transparent: true"
-          position="0 -5 -2" rotation="-90 0 0"></a-entity>
-      </a-marker>
+       </a-marker>
 
       <a-entity camera>
         <!-- カーソルの表示 -->
@@ -187,6 +179,41 @@
       </a-entity>
     </a-scene>
 
-    <script type="text/javascript" src="./quiz_cursor.js"></script>
+    <!-- 解答を確定するボタン -->
+    <!-- Quiz1 -->
+    <button id="ab1" onclick="location.href='./Quiz/1/quiz1.html'" class="inactive" disabled 
+    style="position: fixed;
+    z-index: 30;
+    bottom: 80%;
+    left: 90%;
+    transform: translateX(-50%);
+    padding: 10px;">Let's Quiz
+    </button>
+    <!-- Quiz2 -->
+    <button id="ab2" onclick="location.href='./Quiz/2/quiz2.html'" class="inactive" disabled
+    style="position: fixed;
+    z-index: 30;
+    bottom: 70%;
+    left: 90%;
+    transform: translateX(-50%);
+    padding: 10px;">Let's Quiz</button>
+    <!-- Quiz3 -->
+    <button id="ab3" onclick="location.href='./Quiz/3/quiz3.html'" class="inactive" disabled
+    style="position: fixed;
+    z-index: 30;
+    bottom: 60%;
+    left: 90%;
+    transform: translateX(-50%);
+    padding: 10px;">Let's Quiz</button>
+    <!-- Quiz4 -->
+    <button id="ab4" onclick="location.href='./Quiz/4/quiz4.html'" class="inactive" disabled
+    style="position: fixed;
+    z-index: 30;
+    bottom: 50%;
+    left: 90%;
+    transform: translateX(-50%);
+    padding: 10px;">Let's Quiz</button>
+    
+    <script type="text/javascript" src="./renewquiz.js"></script>
   </body>
 </html>
