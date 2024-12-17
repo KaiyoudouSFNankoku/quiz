@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ローカルストレージの例</title>
+</head>
+
+<body>
+    <input type="text" id="username" placeholder="名前を入力してください">
+    <button onclick="saveData()">保存</button>
+    <button onclick="loadData()">読み込み</button>
+    <p id="output"></p>
+
+    <script>
+        function saveData() {
+            const username = document.getElementById('username').value;
+            localStorage.setItem('username', username);
+            alert('データを保存しました');
+        }
+
+        function loadData() {
+            const username = localStorage.getItem('username');
+            document.getElementById('output').textContent = username
+                ? `保存された名前: ${username}`
+                : 'データがありません';
+        }
+    </script>
+</body>
+
+</html>

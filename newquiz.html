@@ -57,7 +57,7 @@
       }
 
       /* 解答ボタンの表示 */
-      
+
       button{
         cursor: pointer;
       }
@@ -85,7 +85,7 @@
         border: none;
         cursor: pointer;
       }
-      
+
 
       .stamp-history {
         position: fixed;
@@ -120,8 +120,25 @@
   <body style="margin: 0; overflow: hidden;">
     <!-- スコア表示 -->
     <div id="score">
-      <div>Score<br><span id="scoreValue">0</span></div>
+      <div>Score<br><span id="scoreValue"></span></div>
     </div>
+
+    <script>
+      // ローカルストレージからスコアを読み込んで表示
+      window.onload = function () {
+        let savedScore = localStorage.getItem('score');
+        if (savedScore !== null) {
+          document.getElementById('scoreValue').textContent = savedScore;
+        }
+      };
+
+      // スコアをローカルストレージに保存
+      function saveScore() {
+        let score = Math.floor(Math.random() * 100);  // ランダムなスコア
+        localStorage.setItem('score', score);  // ローカルストレージに保存
+        document.getElementById('scoreValue').textContent = score;  // 表示更新
+      }
+    </script>
 
     <!-- メッセージ表示 -->
     <div id="message"></div>
@@ -134,8 +151,8 @@
       <img id="feedbackImage" src="" alt="feedback">
     </div>
 
-    
-    
+
+
 
     <a-scene
       vr-mode-ui="enabled: false;"
@@ -151,7 +168,7 @@
         <img id="ans03" src="./assets/pencil_green.png">
       </a-assets>
 
-    
+
       <!-- Quiz01 -->
       <a-marker type="pattern" preset="ab1" url="./images/marker/pattern-iwamon.patt" id="marker01">
         <a-box position="0 0.5 0" color="red"></a-box>
@@ -181,7 +198,7 @@
 
     <!-- 解答を確定するボタン -->
     <!-- Quiz1 -->
-    <button id="ab1" onclick="location.href='./Quiz/1/quiz1.html'" class="inactive" disabled 
+    <button id="ab1" onclick="location.href='./Quiz/1/quiz1.html'" class="inactive" disabled
     style="position: fixed;
     z-index: 30;
     bottom: 80%;
@@ -213,7 +230,20 @@
     left: 90%;
     transform: translateX(-50%);
     padding: 10px;">Let's Quiz</button>
-    
+
+    <script>
+      function toggleClass() {
+        const button = document.getElementById('ab1');
+        let test2 = localStorage.getItem("is-quiz1-comprete");
+        test2 = Number(test2);
+        if (test2 === 1) {
+          button.classList.remove('inactive');
+          button.classList.add('active');
+        }
+      }
+      toggleClass();
+    </script>
+
     <script type="text/javascript" src="./renewquiz.js"></script>
   </body>
 </html>
