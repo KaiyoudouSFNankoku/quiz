@@ -81,14 +81,14 @@ function checkAnswer(selected, questionData) {
 		localStorage.setItem("score", score);
 		let test1 = localStorage.getItem("bit") || 0;
 		let bit = Number(test1);
-		bit = bit+1;
+		bit = bit+4;
 		localStorage.setItem("bit", bit);
 	} else {
 		resultText.innerHTML = "<span class='wrong'>不正解です。</span>";
 		localStorage.setItem("score", score);
 		let test1 = localStorage.getItem("bit") || 0;
 		let bit = Number(test1);
-		bit = bit+1;
+		bit = bit+4;
 		localStorage.setItem("bit", bit);
 	}
 

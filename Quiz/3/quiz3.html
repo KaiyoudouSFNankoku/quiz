@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ3</title>
+    <link rel="stylesheet" href="quiz3.css">
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        
+        <!-- 全問題数表示 -->
+        <div class="quiz-info">
+            Q<span id="total-questions"></span> 
+        </div>
+
+
+        <h1>クイズ</h1>
+
+        <div class="quiz-container" id="quiz-container">
+            <div class="question-number" id="question-number"></div>
+            <div class="question" id="question"></div>
+            <div class="grid-container" id="choices-container"></div>
+        </div>
+
+        <div class="result-section" id="answer-section">
+            <h2>回答結果</h2>
+            <p id="answer-result"></p>
+            <div id="next-question" onclick="nextQuestion()">次の問題へ</div>
+        </div>
+
+        <div id="final-result" class="final-section">
+            <h2>最終結果</h2>
+            <p id="score"></p>
+            <div id="restart-quiz" onclick="location.href='../../newquiz.html'">ARに戻る
+            </div>
+        </div>
+    </div>
+
+    <!-- 先に問題ファイルを読み込む -->
+    <script src="quiz3.js"></script>
+    <!-- 次にメインのスクリプトを読み込む -->
+    <script src="quiz3.js"></script>
+</body>
+
+</html>
