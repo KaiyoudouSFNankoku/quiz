@@ -1,13 +1,13 @@
 const quizData = [
 	{
-		question: "戦国時代に最初に「天下布武」を掲げた人物は誰？",
+		question: "毘沙門天を深く信仰し、自らを「毘沙門天の生まれ変わり」と称したのは誰？",
 		choices: [
 			{ text: "織田信長" },
 			{ text: "豊臣秀吉" },
 			{ text: "徳川家康" },
 			{ text: "上杉謙信" },
 		],
-		correct: 0,
+		correct: 3,
 	},
 	/*
     {

@@ -1,13 +1,13 @@
 const quizData = [
 	{
-		question: "戦国時代に最初に「天下布武」を掲げた人物は誰？",
+		question: "関白（かんぱく）の地位に就いた戦国武将は誰でしょう？",
 		choices: [
 			{ text: "織田信長" },
 			{ text: "豊臣秀吉" },
 			{ text: "徳川家康" },
 			{ text: "上杉謙信" },
 		],
-		correct: 0,
+		correct: 1,
 	},
 	/*
     {
